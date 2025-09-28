@@ -1,0 +1,457 @@
+{
+  "_comment": "knowledge/patterns.json - Common Scratch programming patterns",
+
+  "simple_patterns": {
+    "jump": {
+      "description": "Make sprite jump up and down",
+      "difficulty": "beginner",
+      "blocks": [
+        {
+          "opcode": "motion_changeyby",
+          "inputs": { "DY": 50 }
+        },
+        {
+          "opcode": "control_wait",
+          "inputs": { "DURATION": 0.3 }
+        },
+        {
+          "opcode": "motion_changeyby",
+          "inputs": { "DY": -50 }
+        }
+      ],
+      "explanation": "First we move up, wait a bit, then come back down - just like jumping!",
+      "triggers": ["key_press"],
+      "keywords": ["jump", "hop", "leap", "bounce up"]
+    },
+
+    "walk": {
+      "description": "Make sprite walk continuously",
+      "difficulty": "beginner",
+      "blocks": [
+        {
+          "opcode": "control_forever",
+          "contains": [
+            {
+              "opcode": "motion_movesteps",
+              "inputs": { "STEPS": 5 }
+            },
+            {
+              "opcode": "control_wait",
+              "inputs": { "DURATION": 0.1 }
+            }
+          ]
+        }
+      ],
+      "explanation": "This makes your sprite walk forward continuously at a steady pace!",
+      "triggers": ["flag_click", "always"],
+      "keywords": ["walk", "march", "move continuously", "keep moving"]
+    },
+
+    "bounce_around": {
+      "description": "Make sprite bounce around the screen",
+      "difficulty": "intermediate",
+      "blocks": [
+        {
+          "opcode": "control_forever",
+          "contains": [
+            {
+              "opcode": "motion_movesteps",
+              "inputs": { "STEPS": 10 }
+            },
+            {
+              "opcode": "motion_ifonedgebounce"
+            }
+          ]
+        }
+      ],
+      "explanation": "Your sprite will move forward and bounce off the edges of the screen!",
+      "triggers": ["flag_click"],
+      "keywords": ["bounce", "bounce around", "bounce off edges", "ping pong"]
+    },
+
+    "spin": {
+      "description": "Make sprite spin around",
+      "difficulty": "beginner",
+      "blocks": [
+        {
+          "opcode": "control_forever",
+          "contains": [
+            {
+              "opcode": "motion_turnright",
+              "inputs": { "DEGREES": 10 }
+            }
+          ]
+        }
+      ],
+      "explanation": "This makes your sprite spin around and around!",
+      "triggers": ["flag_click", "key_press"],
+      "keywords": ["spin", "rotate", "turn around", "twirl"]
+    },
+
+    "grow_shrink": {
+      "description": "Make sprite grow and shrink repeatedly",
+      "difficulty": "intermediate",
+      "blocks": [
+        {
+          "opcode": "control_repeat",
+          "inputs": { "TIMES": 10 },
+          "contains": [
+            {
+              "opcode": "looks_changesizeby",
+              "inputs": { "CHANGE": 10 }
+            },
+            {
+              "opcode": "control_wait",
+              "inputs": { "DURATION": 0.1 }
+            }
+          ]
+        },
+        {
+          "opcode": "control_repeat",
+          "inputs": { "TIMES": 10 },
+          "contains": [
+            {
+              "opcode": "looks_changesizeby",
+              "inputs": { "CHANGE": -10 }
+            },
+            {
+              "opcode": "control_wait",
+              "inputs": { "DURATION": 0.1 }
+            }
+          ]
+        }
+      ],
+      "explanation": "Your sprite will grow bigger, then shrink back to normal size!",
+      "triggers": ["key_press", "sprite_click"],
+      "keywords": ["grow", "shrink", "bigger", "smaller", "size change"]
+    }
+  },
+
+  "interactive_patterns": {
+    "keyboard_control": {
+      "description": "Control sprite movement with arrow keys",
+      "difficulty": "intermediate",
+      "blocks": [
+        {
+          "opcode": "event_whenkeypressed",
+          "fields": { "KEY_OPTION": "up arrow" },
+          "script": [
+            {
+              "opcode": "motion_changeyby",
+              "inputs": { "DY": 10 }
+            }
+          ]
+        },
+        {
+          "opcode": "event_whenkeypressed",
+          "fields": { "KEY_OPTION": "down arrow" },
+          "script": [
+            {
+              "opcode": "motion_changeyby",
+              "inputs": { "DY": -10 }
+            }
+          ]
+        },
+        {
+          "opcode": "event_whenkeypressed",
+          "fields": { "KEY_OPTION": "left arrow" },
+          "script": [
+            {
+              "opcode": "motion_changexby",
+              "inputs": { "DX": -10 }
+            }
+          ]
+        },
+        {
+          "opcode": "event_whenkeypressed",
+          "fields": { "KEY_OPTION": "right arrow" },
+          "script": [
+            {
+              "opcode": "motion_changexby",
+              "inputs": { "DX": 10 }
+            }
+          ]
+        }
+      ],
+      "explanation": "Now you can move your sprite around with the arrow keys!",
+      "keywords": ["arrow keys", "keyboard control", "move with keys", "wasd"]
+    },
+
+    "click_to_action": {
+      "description": "Do something when sprite is clicked",
+      "difficulty": "beginner",
+      "blocks": [
+        {
+          "opcode": "event_whenthisspriteclicked",
+          "script": [
+            {
+              "opcode": "looks_say",
+              "inputs": { "MESSAGE": "You clicked me!" }
+            },
+            {
+              "opcode": "sound_play",
+              "inputs": { "SOUND_MENU": "pop" }
+            }
+          ]
+        }
+      ],
+      "explanation": "When you click the sprite, it will talk and make a sound!",
+      "keywords": ["click", "mouse click", "click sprite", "interactive"]
+    }
+  },
+
+  "game_patterns": {
+    "simple_chase": {
+      "description": "Make sprite follow the mouse pointer",
+      "difficulty": "intermediate",
+      "blocks": [
+        {
+          "opcode": "control_forever",
+          "contains": [
+            {
+              "opcode": "motion_pointtowards",
+              "inputs": { "TOWARDS": "_mouse_" }
+            },
+            {
+              "opcode": "motion_movesteps",
+              "inputs": { "STEPS": 3 }
+            }
+          ]
+        }
+      ],
+      "explanation": "Your sprite will always move towards your mouse cursor!",
+      "triggers": ["flag_click"],
+      "keywords": ["follow mouse", "chase", "follow cursor", "track mouse"]
+    },
+
+    "collect_game": {
+      "description": "Basic collection game setup",
+      "difficulty": "advanced",
+      "blocks": [
+        {
+          "opcode": "event_whenflagclicked",
+          "script": [
+            {
+              "opcode": "control_forever",
+              "contains": [
+                {
+                  "opcode": "motion_gotoxy_menu",
+                  "inputs": { "TO": "_random_" }
+                },
+                {
+                  "opcode": "control_wait",
+                  "inputs": { "DURATION": 2 }
+                }
+              ]
+            }
+          ]
+        }
+      ],
+      "explanation": "This makes an item appear in random places for a collection game!",
+      "keywords": ["collect", "collection game", "random position", "game item"]
+    }
+  },
+
+  "animation_patterns": {
+    "costume_animation": {
+      "description": "Animate sprite by changing costumes",
+      "difficulty": "intermediate",
+      "blocks": [
+        {
+          "opcode": "control_forever",
+          "contains": [
+            {
+              "opcode": "looks_nextcostume"
+            },
+            {
+              "opcode": "control_wait",
+              "inputs": { "DURATION": 0.2 }
+            }
+          ]
+        }
+      ],
+      "explanation": "This creates animation by quickly changing between different costumes!",
+      "triggers": ["flag_click"],
+      "keywords": [
+        "animate",
+        "animation",
+        "costume change",
+        "character animation"
+      ]
+    },
+
+    "glide_dance": {
+      "description": "Make sprite dance by gliding to different positions",
+      "difficulty": "intermediate",
+      "blocks": [
+        {
+          "opcode": "control_forever",
+          "contains": [
+            {
+              "opcode": "motion_glideto",
+              "inputs": { "SECS": 1, "X": 100, "Y": 50 }
+            },
+            {
+              "opcode": "motion_glideto",
+              "inputs": { "SECS": 1, "X": -100, "Y": 50 }
+            },
+            {
+              "opcode": "motion_glideto",
+              "inputs": { "SECS": 1, "X": 0, "Y": -50 }
+            }
+          ]
+        }
+      ],
+      "explanation": "Your sprite will smoothly dance around in a triangle pattern!",
+      "triggers": ["flag_click"],
+      "keywords": ["dance", "glide", "smooth movement", "choreography"]
+    }
+  },
+
+  "pattern_combinations": {
+    "jump_and_sound": {
+      "description": "Jump with sound effect",
+      "difficulty": "beginner",
+      "blocks": [
+        {
+          "opcode": "sound_play",
+          "inputs": { "SOUND_MENU": "boing" }
+        },
+        {
+          "opcode": "motion_changeyby",
+          "inputs": { "DY": 50 }
+        },
+        {
+          "opcode": "control_wait",
+          "inputs": { "DURATION": 0.3 }
+        },
+        {
+          "opcode": "motion_changeyby",
+          "inputs": { "DY": -50 }
+        }
+      ],
+      "explanation": "Your sprite will make a boing sound and jump up and down!",
+      "triggers": ["key_press"],
+      "keywords": ["jump with sound", "sound jump", "noisy jump"]
+    },
+
+    "talking_walker": {
+      "description": "Sprite that walks and talks",
+      "difficulty": "intermediate",
+      "blocks": [
+        {
+          "opcode": "control_forever",
+          "contains": [
+            {
+              "opcode": "motion_movesteps",
+              "inputs": { "STEPS": 10 }
+            },
+            {
+              "opcode": "looks_sayforsecs",
+              "inputs": { "MESSAGE": "I'm walking!", "SECS": 1 }
+            },
+            {
+              "opcode": "motion_ifonedgebounce"
+            }
+          ]
+        }
+      ],
+      "explanation": "Your sprite will walk around, bounce off edges, and talk about it!",
+      "triggers": ["flag_click"],
+      "keywords": ["walk and talk", "chatty walker", "talking character"]
+    },
+
+    "colorful_spinner": {
+      "description": "Spinning sprite that changes colors",
+      "difficulty": "intermediate",
+      "blocks": [
+        {
+          "opcode": "control_forever",
+          "contains": [
+            {
+              "opcode": "motion_turnright",
+              "inputs": { "DEGREES": 15 }
+            },
+            {
+              "opcode": "looks_changeeffectby",
+              "inputs": { "EFFECT": "color", "CHANGE": 10 }
+            }
+          ]
+        }
+      ],
+      "explanation": "Your sprite will spin while changing through rainbow colors!",
+      "triggers": ["flag_click"],
+      "keywords": ["colorful spin", "rainbow spinner", "color change spin"]
+    }
+  },
+
+  "learning_progressions": {
+    "beginner_sequence": [
+      "simple_patterns.jump",
+      "simple_patterns.walk",
+      "interactive_patterns.click_to_action",
+      "simple_patterns.spin"
+    ],
+    "intermediate_sequence": [
+      "simple_patterns.bounce_around",
+      "interactive_patterns.keyboard_control",
+      "animation_patterns.costume_animation",
+      "pattern_combinations.talking_walker"
+    ],
+    "advanced_sequence": [
+      "game_patterns.simple_chase",
+      "game_patterns.collect_game",
+      "pattern_combinations.colorful_spinner",
+      "animation_patterns.glide_dance"
+    ]
+  },
+
+  "pattern_metadata": {
+    "total_patterns": 15,
+    "categories": [
+      "simple",
+      "interactive",
+      "game",
+      "animation",
+      "combinations"
+    ],
+    "difficulty_distribution": {
+      "beginner": 6,
+      "intermediate": 7,
+      "advanced": 2
+    },
+    "most_popular": [
+      "simple_patterns.jump",
+      "interactive_patterns.keyboard_control",
+      "simple_patterns.bounce_around"
+    ],
+    "triggers_supported": ["flag_click", "key_press", "sprite_click", "always"]
+  },
+
+  "natural_language_mapping": {
+    "movement_words": {
+      "jump": ["jump", "hop", "leap", "bounce up", "spring"],
+      "walk": ["walk", "march", "step", "move forward", "go"],
+      "run": ["run", "dash", "sprint", "move fast"],
+      "bounce": ["bounce", "ping pong", "ricochet", "bounce around"],
+      "spin": ["spin", "rotate", "turn", "twirl", "whirl"],
+      "dance": ["dance", "wiggle", "sway", "move rhythmically"]
+    },
+    "interaction_words": {
+      "click": ["click", "press", "tap", "touch", "select"],
+      "keyboard": ["key", "press key", "arrow keys", "wasd", "keyboard"],
+      "follow": ["follow", "chase", "track", "pursue", "go to"]
+    },
+    "appearance_words": {
+      "color": ["color", "colorful", "rainbow", "change color"],
+      "size": ["big", "small", "grow", "shrink", "bigger", "smaller"],
+      "costume": ["costume", "outfit", "appearance", "look different"],
+      "effect": ["effect", "visual", "special effect", "graphic"]
+    },
+    "sound_words": {
+      "sound": ["sound", "noise", "audio", "music", "play sound"],
+      "quiet": ["quiet", "silent", "no sound", "mute"],
+      "loud": ["loud", "louder", "volume up", "noisy"]
+    }
+  }
+}

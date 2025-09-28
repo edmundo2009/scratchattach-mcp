@@ -1,0 +1,447 @@
+{
+  "_comment": "knowledge/scratch_blocks.json - Comprehensive Scratch block definitions",
+  "blocks": {
+    "motion": {
+      "motion_movesteps": {
+        "description": "Move forward/backward by steps",
+        "kid_explanation": "Makes your sprite walk forward or backward!",
+        "inputs": ["STEPS"],
+        "default_values": { "STEPS": 10 },
+        "examples": ["walk forward", "move character", "take steps"]
+      },
+      "motion_turnright": {
+        "description": "Turn clockwise by degrees",
+        "kid_explanation": "Makes your sprite spin to the right!",
+        "inputs": ["DEGREES"],
+        "default_values": { "DEGREES": 15 },
+        "examples": ["turn right", "rotate clockwise", "spin right"]
+      },
+      "motion_turnleft": {
+        "description": "Turn counter-clockwise by degrees",
+        "kid_explanation": "Makes your sprite spin to the left!",
+        "inputs": ["DEGREES"],
+        "default_values": { "DEGREES": 15 },
+        "examples": ["turn left", "rotate counter-clockwise", "spin left"]
+      },
+      "motion_pointindirection": {
+        "description": "Point in direction",
+        "kid_explanation": "Makes your sprite face a specific direction!",
+        "inputs": ["DIRECTION"],
+        "default_values": { "DIRECTION": 90 },
+        "examples": ["face right", "point up", "look direction"]
+      },
+      "motion_pointtowards": {
+        "description": "Point towards sprite or mouse",
+        "kid_explanation": "Makes your sprite look at something else!",
+        "inputs": ["TOWARDS"],
+        "default_values": { "TOWARDS": "_mouse_" },
+        "examples": ["look at mouse", "face other sprite", "point towards"]
+      },
+      "motion_gotoxy": {
+        "description": "Go to x and y position",
+        "kid_explanation": "Makes your sprite jump to a specific spot on screen!",
+        "inputs": ["X", "Y"],
+        "default_values": { "X": 0, "Y": 0 },
+        "examples": ["go to position", "jump to spot", "teleport to"]
+      },
+      "motion_gotoxy_menu": {
+        "description": "Go to random position or mouse",
+        "kid_explanation": "Makes your sprite go to a special place!",
+        "inputs": ["TO"],
+        "default_values": { "TO": "_random_" },
+        "examples": ["go to mouse", "go random", "teleport random"]
+      },
+      "motion_glideto": {
+        "description": "Glide to position in seconds",
+        "kid_explanation": "Makes your sprite smoothly slide to a spot!",
+        "inputs": ["SECS", "X", "Y"],
+        "default_values": { "SECS": 1, "X": 0, "Y": 0 },
+        "examples": ["glide to", "slide to", "smooth move"]
+      },
+      "motion_changexby": {
+        "description": "Change X position by amount",
+        "kid_explanation": "Moves your sprite left (negative) or right (positive)!",
+        "inputs": ["DX"],
+        "default_values": { "DX": 10 },
+        "examples": ["move right", "move left", "go sideways"]
+      },
+      "motion_changeyby": {
+        "description": "Change Y position by amount",
+        "kid_explanation": "Moves your sprite up (positive) or down (negative)!",
+        "inputs": ["DY"],
+        "default_values": { "DY": 10 },
+        "examples": ["move up", "move down", "jump", "fall"]
+      },
+      "motion_setx": {
+        "description": "Set X position to value",
+        "kid_explanation": "Puts your sprite at a specific left-right position!",
+        "inputs": ["X"],
+        "default_values": { "X": 0 },
+        "examples": ["set horizontal position", "place on x"]
+      },
+      "motion_sety": {
+        "description": "Set Y position to value",
+        "kid_explanation": "Puts your sprite at a specific up-down position!",
+        "inputs": ["Y"],
+        "default_values": { "Y": 0 },
+        "examples": ["set vertical position", "place on y"]
+      },
+      "motion_ifonedgebounce": {
+        "description": "If on edge, bounce",
+        "kid_explanation": "Makes your sprite bounce off the sides of the screen!",
+        "inputs": [],
+        "examples": ["bounce off edges", "bounce around", "stay on screen"]
+      }
+    },
+
+    "looks": {
+      "looks_say": {
+        "description": "Say message",
+        "kid_explanation": "Makes your sprite talk in a speech bubble!",
+        "inputs": ["MESSAGE"],
+        "default_values": { "MESSAGE": "Hello!" },
+        "examples": ["say something", "speak", "talk"]
+      },
+      "looks_sayforsecs": {
+        "description": "Say message for seconds",
+        "kid_explanation": "Makes your sprite talk for a specific amount of time!",
+        "inputs": ["MESSAGE", "SECS"],
+        "default_values": { "MESSAGE": "Hello!", "SECS": 2 },
+        "examples": ["say for time", "speak briefly", "timed message"]
+      },
+      "looks_think": {
+        "description": "Think message",
+        "kid_explanation": "Makes your sprite show thoughts in a cloud bubble!",
+        "inputs": ["MESSAGE"],
+        "default_values": { "MESSAGE": "Hmm..." },
+        "examples": ["think something", "show thoughts", "thought bubble"]
+      },
+      "looks_thinkforsecs": {
+        "description": "Think message for seconds",
+        "kid_explanation": "Makes your sprite think for a specific amount of time!",
+        "inputs": ["MESSAGE", "SECS"],
+        "default_values": { "MESSAGE": "Hmm...", "SECS": 2 },
+        "examples": ["think for time", "brief thought", "timed thinking"]
+      },
+      "looks_switchcostumeto": {
+        "description": "Switch costume to",
+        "kid_explanation": "Changes how your sprite looks by picking a different outfit!",
+        "inputs": ["COSTUME"],
+        "default_values": { "COSTUME": "costume2" },
+        "examples": ["change costume", "switch outfit", "change appearance"]
+      },
+      "looks_nextcostume": {
+        "description": "Next costume",
+        "kid_explanation": "Changes your sprite to the next outfit in the list!",
+        "inputs": [],
+        "examples": ["next outfit", "change appearance", "cycle costume"]
+      },
+      "looks_switchbackdropto": {
+        "description": "Switch backdrop to",
+        "kid_explanation": "Changes the background scene!",
+        "inputs": ["BACKDROP"],
+        "default_values": { "BACKDROP": "backdrop2" },
+        "examples": ["change background", "switch scene", "new backdrop"]
+      },
+      "looks_changeeffectby": {
+        "description": "Change graphic effect by amount",
+        "kid_explanation": "Makes your sprite look different with cool effects!",
+        "inputs": ["EFFECT", "CHANGE"],
+        "default_values": { "EFFECT": "color", "CHANGE": 25 },
+        "examples": ["change color", "add effect", "make colorful"]
+      },
+      "looks_seteffectto": {
+        "description": "Set graphic effect to value",
+        "kid_explanation": "Sets how strong a visual effect should be!",
+        "inputs": ["EFFECT", "VALUE"],
+        "default_values": { "EFFECT": "color", "VALUE": 0 },
+        "examples": ["set effect", "apply effect", "visual effect"]
+      },
+      "looks_cleargraphiceffects": {
+        "description": "Clear graphic effects",
+        "kid_explanation": "Removes all visual effects and makes sprite look normal!",
+        "inputs": [],
+        "examples": ["clear effects", "back to normal", "remove effects"]
+      },
+      "looks_changesizeby": {
+        "description": "Change size by percentage",
+        "kid_explanation": "Makes your sprite bigger (positive) or smaller (negative)!",
+        "inputs": ["CHANGE"],
+        "default_values": { "CHANGE": 10 },
+        "examples": ["grow bigger", "shrink smaller", "change size"]
+      },
+      "looks_setsizeto": {
+        "description": "Set size to percentage",
+        "kid_explanation": "Makes your sprite a specific size (100% is normal)!",
+        "inputs": ["SIZE"],
+        "default_values": { "SIZE": 100 },
+        "examples": ["set size", "make specific size", "resize"]
+      },
+      "looks_show": {
+        "description": "Show sprite",
+        "kid_explanation": "Makes your sprite visible on the screen!",
+        "inputs": [],
+        "examples": ["show sprite", "make visible", "appear"]
+      },
+      "looks_hide": {
+        "description": "Hide sprite",
+        "kid_explanation": "Makes your sprite invisible (but it's still there)!",
+        "inputs": [],
+        "examples": ["hide sprite", "make invisible", "disappear"]
+      }
+    },
+
+    "sound": {
+      "sound_play": {
+        "description": "Start sound",
+        "kid_explanation": "Starts playing a sound effect!",
+        "inputs": ["SOUND_MENU"],
+        "default_values": { "SOUND_MENU": "meow" },
+        "examples": ["play sound", "make noise", "sound effect"]
+      },
+      "sound_playuntildone": {
+        "description": "Play sound until done",
+        "kid_explanation": "Plays a sound and waits for it to finish!",
+        "inputs": ["SOUND_MENU"],
+        "default_values": { "SOUND_MENU": "meow" },
+        "examples": ["play full sound", "wait for sound", "complete sound"]
+      },
+      "sound_stopallsounds": {
+        "description": "Stop all sounds",
+        "kid_explanation": "Stops all sounds that are currently playing!",
+        "inputs": [],
+        "examples": ["stop sounds", "silence", "quiet"]
+      },
+      "sound_changeeffectby": {
+        "description": "Change sound effect by amount",
+        "kid_explanation": "Makes sounds higher, lower, or different!",
+        "inputs": ["EFFECT", "VALUE"],
+        "default_values": { "EFFECT": "pitch", "VALUE": 10 },
+        "examples": ["change pitch", "sound effect", "modify sound"]
+      },
+      "sound_seteffectto": {
+        "description": "Set sound effect to value",
+        "kid_explanation": "Sets how much to change the sound!",
+        "inputs": ["EFFECT", "VALUE"],
+        "default_values": { "EFFECT": "pitch", "VALUE": 100 },
+        "examples": ["set sound effect", "sound pitch", "audio effect"]
+      },
+      "sound_cleareffects": {
+        "description": "Clear sound effects",
+        "kid_explanation": "Makes sounds go back to normal!",
+        "inputs": [],
+        "examples": ["normal sound", "clear effects", "reset audio"]
+      },
+      "sound_changevolumeby": {
+        "description": "Change volume by amount",
+        "kid_explanation": "Makes sounds louder (positive) or quieter (negative)!",
+        "inputs": ["VOLUME"],
+        "default_values": { "VOLUME": -10 },
+        "examples": ["louder", "quieter", "change volume"]
+      },
+      "sound_setvolumeto": {
+        "description": "Set volume to percentage",
+        "kid_explanation": "Sets exactly how loud sounds should be!",
+        "inputs": ["VOLUME"],
+        "default_values": { "VOLUME": 100 },
+        "examples": ["set volume", "loudness level", "sound level"]
+      }
+    },
+
+    "events": {
+      "event_whenflagclicked": {
+        "description": "When green flag clicked",
+        "kid_explanation": "This starts your program when you click the green flag!",
+        "inputs": [],
+        "is_hat_block": true,
+        "examples": ["start program", "begin", "when start"]
+      },
+      "event_whenkeypressed": {
+        "description": "When key pressed",
+        "kid_explanation": "This starts code when you press a key on your keyboard!",
+        "fields": ["KEY_OPTION"],
+        "default_values": { "KEY_OPTION": "space" },
+        "is_hat_block": true,
+        "examples": ["when key pressed", "keyboard control", "press key"]
+      },
+      "event_whenthisspriteclicked": {
+        "description": "When this sprite clicked",
+        "kid_explanation": "This starts code when you click on this sprite!",
+        "inputs": [],
+        "is_hat_block": true,
+        "examples": ["when clicked", "click sprite", "mouse click"]
+      },
+      "event_whenbackdropswitchesto": {
+        "description": "When backdrop switches to",
+        "kid_explanation": "This starts code when the background changes!",
+        "inputs": ["BACKDROP"],
+        "default_values": { "BACKDROP": "backdrop1" },
+        "is_hat_block": true,
+        "examples": ["when scene changes", "backdrop change", "new background"]
+      },
+      "event_whengreaterthan": {
+        "description": "When value is greater than number",
+        "kid_explanation": "This starts code when something gets bigger than a number!",
+        "inputs": ["WHENGREATERTHANMENU", "VALUE"],
+        "default_values": { "WHENGREATERTHANMENU": "loudness", "VALUE": 10 },
+        "is_hat_block": true,
+        "examples": [
+          "when louder than",
+          "when bigger than",
+          "threshold trigger"
+        ]
+      },
+      "event_whenbroadcastreceived": {
+        "description": "When I receive message",
+        "kid_explanation": "This starts code when it gets a message from another sprite!",
+        "fields": ["BROADCAST_OPTION"],
+        "default_values": { "BROADCAST_OPTION": "message1" },
+        "is_hat_block": true,
+        "examples": [
+          "receive message",
+          "sprite communication",
+          "message received"
+        ]
+      },
+      "event_broadcast": {
+        "description": "Broadcast message",
+        "kid_explanation": "Sends a message to all sprites!",
+        "inputs": ["BROADCAST_INPUT"],
+        "default_values": { "BROADCAST_INPUT": "message1" },
+        "examples": ["send message", "broadcast", "sprite communication"]
+      },
+      "event_broadcastandwait": {
+        "description": "Broadcast message and wait",
+        "kid_explanation": "Sends a message and waits for other sprites to finish!",
+        "inputs": ["BROADCAST_INPUT"],
+        "default_values": { "BROADCAST_INPUT": "message1" },
+        "examples": ["send and wait", "broadcast wait", "synchronized message"]
+      }
+    },
+
+    "control": {
+      "control_wait": {
+        "description": "Wait seconds",
+        "kid_explanation": "Makes your program pause for some time!",
+        "inputs": ["DURATION"],
+        "default_values": { "DURATION": 1 },
+        "examples": ["wait", "pause", "delay"]
+      },
+      "control_repeat": {
+        "description": "Repeat number of times",
+        "kid_explanation": "Does the blocks inside a specific number of times!",
+        "inputs": ["TIMES"],
+        "default_values": { "TIMES": 10 },
+        "is_c_block": true,
+        "examples": ["repeat times", "do multiple", "loop count"]
+      },
+      "control_forever": {
+        "description": "Repeat forever",
+        "kid_explanation": "Makes the blocks inside repeat over and over forever!",
+        "inputs": [],
+        "is_c_block": true,
+        "examples": ["forever", "repeat always", "infinite loop"]
+      },
+      "control_if": {
+        "description": "If condition then",
+        "kid_explanation": "Only does the blocks inside if something is true!",
+        "inputs": ["CONDITION"],
+        "is_c_block": true,
+        "examples": ["if then", "conditional", "check if"]
+      },
+      "control_if_else": {
+        "description": "If condition then else",
+        "kid_explanation": "Does one thing if true, another thing if false!",
+        "inputs": ["CONDITION"],
+        "is_c_block": true,
+        "examples": ["if else", "either or", "two choices"]
+      },
+      "control_wait_until": {
+        "description": "Wait until condition",
+        "kid_explanation": "Stops and waits until something becomes true!",
+        "inputs": ["CONDITION"],
+        "examples": ["wait until", "pause until", "wait for"]
+      },
+      "control_repeat_until": {
+        "description": "Repeat until condition",
+        "kid_explanation": "Keeps repeating until something becomes true!",
+        "inputs": ["CONDITION"],
+        "is_c_block": true,
+        "examples": ["repeat until", "keep doing until", "loop until"]
+      },
+      "control_stop": {
+        "description": "Stop scripts",
+        "kid_explanation": "Stops your program or parts of it!",
+        "fields": ["STOP_OPTION"],
+        "default_values": { "STOP_OPTION": "all" },
+        "examples": ["stop program", "end", "halt"]
+      }
+    }
+  },
+
+  "categories": {
+    "motion": {
+      "color": "#4C97FF",
+      "description": "Make sprites move around the screen",
+      "common_uses": ["walking", "jumping", "flying", "bouncing"]
+    },
+    "looks": {
+      "color": "#9966FF",
+      "description": "Change how sprites look and what they say",
+      "common_uses": ["talking", "changing costumes", "effects", "size"]
+    },
+    "sound": {
+      "color": "#CF63CF",
+      "description": "Play sounds and music",
+      "common_uses": ["music", "sound effects", "audio feedback"]
+    },
+    "events": {
+      "color": "#FFBF00",
+      "description": "Start scripts when things happen",
+      "common_uses": ["starting programs", "user input", "triggers"]
+    },
+    "control": {
+      "color": "#FFAB19",
+      "description": "Control when and how often things happen",
+      "common_uses": ["loops", "delays", "conditions", "timing"]
+    }
+  },
+
+  "difficulty_levels": {
+    "beginner": {
+      "recommended_blocks": [
+        "event_whenflagclicked",
+        "motion_movesteps",
+        "motion_changexby",
+        "motion_changeyby",
+        "looks_say",
+        "sound_play",
+        "control_wait"
+      ],
+      "max_blocks_per_script": 5,
+      "concepts": ["basic movement", "simple events", "sounds"]
+    },
+    "intermediate": {
+      "recommended_blocks": [
+        "event_whenkeypressed",
+        "control_forever",
+        "control_repeat",
+        "motion_ifonedgebounce",
+        "looks_nextcostume",
+        "control_if"
+      ],
+      "max_blocks_per_script": 10,
+      "concepts": ["loops", "keyboard input", "simple conditions"]
+    },
+    "advanced": {
+      "recommended_blocks": [
+        "event_whenbroadcastreceived",
+        "control_if_else",
+        "control_repeat_until",
+        "event_whengreaterthan"
+      ],
+      "max_blocks_per_script": 20,
+      "concepts": ["messaging", "complex conditions", "advanced loops"]
+    }
+  }
+}
