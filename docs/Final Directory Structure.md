@@ -1,7 +1,7 @@
-scratchattach-mcp-educational/
+scratchattach-mcp/
 ├── README.md
 ├── requirements.txt
-├── .env.example
+├── .env
 ├── .gitignore
 ├── setup.py                    # For easy installation
 │
