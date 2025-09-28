@@ -1,0 +1,86 @@
+{
+  "text_format_outputs": {
+    "simple_move": {
+      "input": "make the cat move right 10 steps",
+      "expected_text": "Step 1: Move 10 steps to the right\n\nThis makes your sprite walk forward or backward!"
+    },
+    "jump_with_trigger": {
+      "input": "when space pressed jump up",
+      "expected_contains": ["jump", "space", "up"]
+    }
+  },
+  "pictoblox_format_outputs": {
+    "simple_move": {
+      "input": "make the cat move right 10 steps",
+      "expected_structure": {
+        "objName": "Stage",
+        "sounds": [],
+        "costumes": [],
+        "currentCostumeIndex": 0,
+        "scripts": []
+      }
+    }
+  },
+  "block_generation_outputs": {
+    "move_right": {
+      "input_intent": {
+        "action": "move",
+        "subject": "sprite",
+        "trigger": null,
+        "parameters": {"direction": "right", "steps": 10},
+        "modifiers": []
+      },
+      "expected_blocks": [
+        {
+          "opcode": "motion_changexby",
+          "category": "motion",
+          "inputs": {"DX": 10},
+          "fields": {},
+          "description": "Move left/right"
+        }
+      ]
+    },
+    "jump_pattern": {
+      "input_intent": {
+        "action": "jump",
+        "subject": "sprite",
+        "trigger": null,
+        "parameters": {},
+        "modifiers": []
+      },
+      "expected_blocks": [
+        {
+          "opcode": "motion_changeyby",
+          "category": "motion",
+          "inputs": {"DY": 50},
+          "fields": {},
+          "description": "Move up/down by pixels"
+        }
+      ]
+    }
+  },
+  "mcp_tool_responses": {
+    "generate_scratch_blocks_success": {
+      "input": {
+        "description": "make the cat move right 10 steps",
+        "output_format": "text"
+      },
+      "expected_response": {
+        "success": true,
+        "format": "text",
+        "difficulty": "beginner"
+      }
+    },
+    "explain_scratch_concept_success": {
+      "input": {
+        "concept": "loops",
+        "age_level": "beginner"
+      },
+      "expected_response": {
+        "success": true,
+        "concept": "loops",
+        "age_level": "beginner"
+      }
+    }
+  }
+}

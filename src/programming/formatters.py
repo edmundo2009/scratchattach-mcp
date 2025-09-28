@@ -1,5 +1,6 @@
-from typing import Dict, Any
+from typing import Dict, Any, List
 import json
+from .block_generator import BlockSequence, ScratchBlock
 
 
 class PictoBloxFormatter:
@@ -121,6 +122,8 @@ class TextFormatter:
 
 def generate_scratch_program(user_input: str, output_format: str = "text") -> str:
   """Complete pipeline from natural language to Scratch program"""
+  from .parsers import NaturalLanguageParser
+  from .block_generator import BlockGenerator
 
   # Parse input
   parser = NaturalLanguageParser()
@@ -142,19 +145,20 @@ def generate_scratch_program(user_input: str, output_format: str = "text") -> st
   return formatter.format(block_sequence)
 
 
-# Test examples
-test_cases = [
-  "make the cat move right 10 steps",
-  "when space pressed jump up",
-  "play sound when sprite clicked",
-  "move left and play sound and say hello"
-]
+if __name__ == "__main__":
+  # Test examples
+  test_cases = [
+    "make the cat move right 10 steps",
+    "when space pressed jump up",
+    "play sound when sprite clicked",
+    "move left and play sound and say hello"
+  ]
 
-print("=== Block Generation System Demo ===\n")
+  print("=== Block Generation System Demo ===\n")
 
-for test_input in test_cases:
-  print(f"Input: '{test_input}'")
-  print("Output:")
-  result = generate_scratch_program(test_input)
-  print(result)
-  print("\n" + "="*50 + "\n")
+  for test_input in test_cases:
+    print(f"Input: '{test_input}'")
+    print("Output:")
+    result = generate_scratch_program(test_input)
+    print(result)
+    print("\n" + "="*50 + "\n")

@@ -7,17 +7,17 @@ from typing import List, Dict, Any, Optional
 
 # Import existing scratchattach functionality
 import scratchattach as sa
-from mcp import FastMCP
+from mcp.server import FastMCP
 
 # Import our new block generation system
 from programming.block_generator import (
-  NaturalLanguageParser,
   BlockGenerator,
   Intent,
   ScratchBlock,
   BlockSequence
 )
-from programming.formatters import TextFormatter, PictoBloxFormatter, ScratchOnlineFormatter
+from programming.parsers import NaturalLanguageParser
+from programming.formatters import TextFormatter, PictoBloxFormatter
 
 # --- REVISED INITIALIZATION SECTION ---
 
@@ -33,7 +33,6 @@ try:
   generator = BlockGenerator()  # Now loads from knowledge base
   text_formatter = TextFormatter()
   pictoblox_formatter = PictoBloxFormatter()
-  scratch_formatter = ScratchOnlineFormatter()
 
   print("✓ Block generation system initialized successfully")
   print(
@@ -124,7 +123,7 @@ def generate_scratch_blocks(description: str, output_format: str = "text"):
     formatters = {
       "text": text_formatter,
       "pictoblox": pictoblox_formatter,
-      "scratch": scratch_formatter
+      "scratch": pictoblox_formatter  # Use PictoBlox formatter for scratch format too
     }
 
     if output_format in formatters:
@@ -295,10 +294,11 @@ def get_user_info(username: str):
     data = {k: v for k, v in user.__dict__.items()
         if not k.startswith("_") and not k.startswith("update")}
     return {"success": True, "data": data}
-  except sa.exceptions.UserNotFound:
-    return {"success": False, "message": "User not found", "error_type": "user_not_found"}
   except Exception as e:
-    return {"success": False, "message": str(e), "error_type": "scratch_api_error"}
+    if "not found" in str(e).lower():
+      return {"success": False, "message": "User not found", "error_type": "user_not_found"}
+    else:
+      return {"success": False, "message": str(e), "error_type": "scratch_api_error"}
 
 
 @mcp.tool()
@@ -316,10 +316,11 @@ def get_project_info(id: int):
     data = {k: v for k, v in project.__dict__.items()
         if not k.startswith("_") and not k.startswith("update")}
     return {"success": True, "data": data}
-  except sa.exceptions.ProjectNotFound:
-    return {"success": False, "message": "Project not found", "error_type": "project_not_found"}
   except Exception as e:
-    return {"success": False, "message": str(e), "error_type": "scratch_api_error"}
+    if "not found" in str(e).lower():
+      return {"success": False, "message": "Project not found", "error_type": "project_not_found"}
+    else:
+      return {"success": False, "message": str(e), "error_type": "scratch_api_error"}
 
 # Helper functions
 
@@ -369,3 +370,29 @@ def get_system_status():
       "available_actions": generator.get_available_actions() if generator else [],
       "formatters": ["text", "pictoblox", "scratch", "blocks"]
     },
+    "scratch_authentication": {
+      "available": session is not None and me is not None,
+      "username": me.username if me else None
+    },
+    "system_info": {
+      "mcp_server": "scratchattach-edu",
+      "version": "1.0.0"
+    }
+  }
+
+
+# Main execution
+if __name__ == "__main__":
+  # Try to initialize Scratch session (optional)
+  initialize_scratch_session()
+
+  # Start the MCP server
+  print("Starting scratchattach-edu MCP server...")
+  print("Educational features available without Scratch login")
+  if session and me:
+    print(f"Scratch profile management available for user: {me.username}")
+  else:
+    print("Scratch profile management disabled (no credentials)")
+
+  # Run the server
+  mcp.run()

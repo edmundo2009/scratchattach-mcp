@@ -1,0 +1,90 @@
+{
+  "simple_commands": [
+    {
+      "input": "make the cat move right 10 steps",
+      "expected_intents": [
+        {
+          "action": "move",
+          "subject": "sprite",
+          "trigger": null,
+          "parameters": {"direction": "right", "steps": 10},
+          "modifiers": []
+        }
+      ]
+    },
+    {
+      "input": "when space pressed jump up",
+      "expected_intents": [
+        {
+          "action": "jump",
+          "subject": "sprite", 
+          "trigger": "key_press",
+          "parameters": {"key": "space", "direction": "up"},
+          "modifiers": []
+        }
+      ]
+    },
+    {
+      "input": "play sound when sprite clicked",
+      "expected_intents": [
+        {
+          "action": "play_sound",
+          "subject": "sprite",
+          "trigger": "sprite_click",
+          "parameters": {},
+          "modifiers": []
+        }
+      ]
+    }
+  ],
+  "complex_commands": [
+    {
+      "input": "move left and play sound and say hello",
+      "expected_intents": [
+        {
+          "action": "move",
+          "subject": "sprite",
+          "trigger": null,
+          "parameters": {"direction": "left", "steps": 10},
+          "modifiers": []
+        },
+        {
+          "action": "play_sound",
+          "subject": "sprite",
+          "trigger": null,
+          "parameters": {},
+          "modifiers": []
+        },
+        {
+          "action": "say",
+          "subject": "sprite",
+          "trigger": null,
+          "parameters": {"text": "hello"},
+          "modifiers": []
+        }
+      ]
+    }
+  ],
+  "edge_cases": [
+    {
+      "input": "",
+      "expected_intents": []
+    },
+    {
+      "input": "xyz unknown command",
+      "expected_intents": []
+    },
+    {
+      "input": "MOVE RIGHT 5 STEPS",
+      "expected_intents": [
+        {
+          "action": "move",
+          "subject": "sprite",
+          "trigger": null,
+          "parameters": {"direction": "right", "steps": 5},
+          "modifiers": []
+        }
+      ]
+    }
+  ]
+}
