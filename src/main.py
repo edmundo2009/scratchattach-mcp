@@ -34,12 +34,12 @@ try:
   text_formatter = TextFormatter()
   pictoblox_formatter = PictoBloxFormatter()
 
-  print("✓ Block generation system initialized successfully")
+  print("[OK] Block generation system initialized successfully")
   print(
-    f"✓ Available actions: {', '.join(generator.get_available_actions()[:10])}...")
+    f"[OK] Available actions: {', '.join(generator.get_available_actions()[:10])}...")
 
 except Exception as e:
-  print(f"✗ Failed to initialize block generation system: {e}")
+  print(f"[ERROR] Failed to initialize block generation system: {e}")
   print("This is critical - block generation features will not work")
   # We can still continue for original Scratch profile features
   generator = None
@@ -66,11 +66,11 @@ def initialize_scratch_session():
     print("Authenticating with Scratch...")
     session = sa.login(username, password)
     me = session.get_linked_user()
-    print(f"✓ Successfully authenticated as {me.username}")
+    print(f"[OK] Successfully authenticated as {me.username}")
     return True
 
   except Exception as e:
-    print(f"✗ Scratch authentication failed: {e}")
+    print(f"[ERROR] Scratch authentication failed: {e}")
     print("Profile management features will be disabled")
     return False
 
@@ -381,8 +381,8 @@ def get_system_status():
   }
 
 
-# Main execution
-if __name__ == "__main__":
+def main():
+  """Main entry point for the MCP server"""
   # Try to initialize Scratch session (optional)
   initialize_scratch_session()
 
@@ -396,3 +396,8 @@ if __name__ == "__main__":
 
   # Run the server
   mcp.run()
+
+
+# Main execution
+if __name__ == "__main__":
+  main()

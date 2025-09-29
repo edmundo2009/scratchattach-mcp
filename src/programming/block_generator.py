@@ -160,7 +160,7 @@ class BlockGenerator:
   def _build_action_mapping(self) -> Dict[str, Dict[str, Any]]:
     """Build action-to-block mapping from knowledge base"""
     mapping = {}
-    
+
     # Extract action mappings from block descriptions and metadata
     for category, blocks in self.block_templates.items():
       for block_id, block_info in blocks.items():
@@ -173,19 +173,32 @@ class BlockGenerator:
                 "category": category,
                 "info": block_info
               }
-            elif "x" in block_id.lower():
+              # Also map horizontal movement to the same block for left/right
               mapping["move_horizontal"] = {
-                "block_id": block_id,
-                "category": category, 
-                "info": block_info
-              }
-            elif "y" in block_id.lower():
-              mapping["move_vertical"] = {
                 "block_id": block_id,
                 "category": category,
                 "info": block_info
               }
-        
+          elif "gotoxy" in block_id.lower():
+            mapping["move_vertical"] = {
+              "block_id": block_id,
+              "category": category,
+              "info": block_info
+            }
+          elif "turn" in block_info.get("description", "").lower():
+            if "right" in block_id.lower() or "clockwise" in block_info.get("description", "").lower():
+              mapping["turn_right"] = {
+                "block_id": block_id,
+                "category": category,
+                "info": block_info
+              }
+            elif "left" in block_id.lower() or "counter-clockwise" in block_info.get("description", "").lower():
+              mapping["turn_left"] = {
+                "block_id": block_id,
+                "category": category,
+                "info": block_info
+              }
+
         elif category == "events":
           if "flag" in block_info.get("description", "").lower():
             mapping["start"] = {
@@ -199,7 +212,23 @@ class BlockGenerator:
               "category": category,
               "info": block_info
             }
-    
+
+        elif category == "looks":
+          if "say" in block_info.get("description", "").lower():
+            mapping["say"] = {
+              "block_id": block_id,
+              "category": category,
+              "info": block_info
+            }
+
+        elif category == "sound":
+          if "play" in block_info.get("description", "").lower():
+            mapping["play_sound"] = {
+              "block_id": block_id,
+              "category": category,
+              "info": block_info
+            }
+
     return mapping
   
   def generate_blocks(self, intents: List[Intent]) -> BlockSequence:
@@ -270,7 +299,7 @@ class BlockGenerator:
   def _create_action_block(self, intent: Intent) -> Optional[ScratchBlock]:
     """Create action block using knowledge base"""
     action_key = intent.action
-    
+
     # Handle directional movement
     if intent.action == "move" and "direction" in intent.parameters:
       direction = intent.parameters["direction"]
@@ -278,25 +307,32 @@ class BlockGenerator:
         action_key = "move_horizontal"
       elif direction in ["up", "down"]:
         action_key = "move_vertical"
-    
+
     if action_key in self.action_mapping:
       block_info = self.action_mapping[action_key]
       block_data = block_info["info"]
-      
+
       # Create block from knowledge base
       block = ScratchBlock(
         opcode=block_info["block_id"],
         category=block_info["category"],
         description=block_data.get("description", ""),
       )
-      
+
       # Add inputs based on knowledge base defaults and intent parameters
       if "inputs" in block_data and block_data["inputs"]:
+        block.inputs = {}
         for input_name in block_data["inputs"]:
           # Use intent parameters or knowledge base defaults
           default_values = block_data.get("default_values", {})
-          
-          if input_name == "STEPS" or input_name == "DX" or input_name == "DY":
+
+          if input_name == "STEPS":
+            steps = intent.parameters.get("steps", default_values.get(input_name, 10))
+            # Handle left movement with negative steps
+            if intent.parameters.get("direction") == "left":
+              steps = -abs(steps)
+            block.inputs[input_name] = steps
+          elif input_name in ["DX", "DY", "X", "Y"]:
             value = intent.parameters.get("steps", default_values.get(input_name, 10))
             
             # Apply direction for horizontal/vertical movement
